@@ -7,15 +7,25 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/edit_text_name"
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/edit_text_as"
+        <EditText
+            android:id="@+id/edit_text_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edit_text_as"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -23,13 +33,14 @@
         android:hint="Booking Date">
 
         <EditText
-            android:textSize="22sp"
-            android:id="@+id/txtdateku"
+            android:id="@+id/edit_text_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:editable="false"
-            android:text="nothing selected"/>
+            android:text="nothing selected"
+            android:textSize="22sp" />
     </android.support.design.widget.TextInputLayout>
+
     <Button
         android:id="@+id/button_add"
         android:layout_width="match_parent"
