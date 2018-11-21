@@ -17,11 +17,16 @@ import com.example.rplrus021.myapplication.network.jsonRespond;
 import com.example.rplrus021.myapplication.network.json_api;
 import com.example.rplrus021.myapplication.network.retrofitclientinstance;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 
+import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -38,52 +43,42 @@ public class MainActivity extends AppCompatActivity {
         edit_text_name = (EditText) findViewById(R.id.edit_text_name);
         edit_text_as = (EditText) findViewById(R.id.edit_text_as);
         button_add = (Button) findViewById(R.id.button_add);
-
-        calendar_setting();
-
+        edit_text_date = (EditText)findViewById(R.id.edit_text_date);
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        visit_date = simpleDateFormat1.format(calendar.getTime());
+        edit_text_date.setText(visit_date);
         button_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 name = edit_text_name.getText().toString();
                 as = edit_text_as.getText().toString();
+
                 if (name.trim().isEmpty() || as.trim().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Please Write name and as", Toast.LENGTH_SHORT).show();
                 } else {
-                    savedata();
+                    savedata(name, as,visit_date);
                 }
 
             }
         });
     }
 
-    private void calendar_setting() {
+    private void savedata(String name, String as,String visit_date) {
 
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
-        visit_date = simpleDateFormat1.format(calendar.getTime());
-    }
-
-    private void savedata() {
         json_api service = retrofitclientinstance.getRetrofitInstance().create(json_api.class);
-        Call<data> call = service.daftar(name, as, visit_date);
+        Call<data>call = service.daftar("",name,as,visit_date);
         call.enqueue(new Callback<data>() {
             @Override
             public void onResponse(Call<data> call, Response<data> response) {
-                String nama = response.body().getName();
-                String sebagai = response.body().getAs();
-                String tanggal_kunjung = response.body().getTanggal_kunjung();
-                Toast.makeText(getApplicationContext(), nama, Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(), sebagai, Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(), tanggal_kunjung, Toast.LENGTH_SHORT).show();
+                Log.e("TAG", "onResponse: "+response.body().toString() );
             }
 
             @Override
             public void onFailure(Call<data> call, Throwable t) {
-                Log.d("responku", "onFailure: gagal");
-                Log.e("TAG", "onFailure: " + t.getMessage());
+                Log.e("TAG", "onFailure: "+t.getMessage() );
             }
         });
-
     }
 }
 

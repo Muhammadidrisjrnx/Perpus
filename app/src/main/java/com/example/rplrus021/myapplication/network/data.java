@@ -4,47 +4,48 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class data {
-    @SerializedName("value")
+    @SerializedName("id")
     @Expose
-    private Integer value;
-    @SerializedName("message")
-    @Expose
-    private String message;
+    private String id;
     @SerializedName("name")
     @Expose
     private String name;
-    @SerializedName("as")
+    @SerializedName("sebagai")
     @Expose
-    private String as;
+    private String sebagai;
     @SerializedName("tanggal_kunjung")
     @Expose
-    private String tanggal_kunjung;
+    private String tanggalKunjung;
 
-    public Integer getValue() {
-        return value;
+    public String getId() {
+        return id;
     }
 
-    public void setValue(Integer value) {
-        this.value = value;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public String getTanggal_kunjung() {
-        return tanggal_kunjung;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getAs() {
-        return as;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSebagai() {
+        return sebagai;
+    }
+
+    public void setSebagai(String sebagai) {
+        this.sebagai = sebagai;
+    }
+
+    public String getTanggalKunjung() {
+        return tanggalKunjung;
+    }
+
+    public void setTanggalKunjung(String tanggalKunjung) {
+        this.tanggalKunjung = tanggalKunjung;
     }
 }
