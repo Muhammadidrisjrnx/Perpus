@@ -83,9 +83,9 @@ public class MainActivity extends AppCompatActivity {
             try {
                 String tmpName = model.getNama().replaceAll(" ", "%20");
                 String tmpSebagai = model.getSebagai().replaceAll(" ", "%20");
-                String tmpTanggal_kunjung= model.getSebagai().replaceAll(" ", "%20");
-                String url = config_url.url + "perpus/aksi_daftar.php?nama=" + tmpName + "&&sebagai=" + tmpSebagai + "&&tanggal_kunjung=" + tmpTanggal_kunjung + "";
-                System.out.println(url);
+                String tmpTanggal_kunjung= model.getTanggal().replaceAll("", "");
+                String url = config_url.url + "perpus/insert.php?id="+""+"&&nama=" + tmpName + "&&sebagai=" + tmpSebagai + "&&tanggal_kunjung=" + tmpTanggal_kunjung + "";
+                System.out.println("url string "+url);
                 DefaultHttpClient httpClient = new DefaultHttpClient();
                 HttpGet httpGet = new HttpGet(url);
                 HttpResponse httpResponse = httpClient.execute(httpGet);
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
             Log.d("hasil json ", "onPostExecute: " + jsonObject.toString());
-
+            progressDialog.dismiss();
             if (jsonObject != null) {
                 try {
                     JSONObject Result = jsonObject.getJSONObject("Result");
